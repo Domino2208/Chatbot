@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Agency</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="//code.tidio.co/6jdaqidlugffev7qacipesduklfsap9o.js" async></script>
 </head>
 
 <body>
@@ -40,15 +39,7 @@
         </ul>
     </div>
 
-    <div class="container">
-
-        <div>
-            <h2>Live Chat</h2>
-            <p>Eine Live Demo von unseren Chatbots</p>
-        </div>
-
-        <div id="chat-container" class="chat-container"></div>
-    </div>
+    <div id="chat-container" class="chat-container"></div>
 
     <div class="container">
         <h2>Kontaktiere uns</h2>
@@ -61,12 +52,13 @@
         <button>Senden</button>
     </div>
 
+    <script src="//code.tidio.co/6jdaqidlugffev7qacipesduklfsap9o.js" async></script>
     <script>
         document.addEventListener("tidioChat-ready", function () {
-            // Widget unten rechts ausblenden
+            // Standard-Bubble ausblenden
             window.tidioChatApi.hide();
 
-            // Etwas warten, bis das iframe existiert
+            // Warten, bis das iframe erzeugt wurde
             function moveChat() {
                 const tidioIframe = document.querySelector("#tidio-chat iframe");
                 if (tidioIframe) {
@@ -76,8 +68,11 @@
                     // Größe anpassen
                     tidioIframe.style.width = "100%";
                     tidioIframe.style.height = "100%";
+                    tidioIframe.style.position = "relative";
+                    tidioIframe.style.bottom = "auto";
+                    tidioIframe.style.right = "auto";
                 } else {
-                    // Wenn noch nicht da → erneut versuchen
+                    // Wenn noch nicht da, nochmal probieren
                     setTimeout(moveChat, 200);
                 }
             }
@@ -86,7 +81,7 @@
         });
     </script>
 
+
 </body>
 
 </html>
-
