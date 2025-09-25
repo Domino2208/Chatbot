@@ -40,7 +40,15 @@
         </ul>
     </div>
 
-    <div id="chat-container" class="chat-container"></div>
+    <div class="container">
+
+        <div>
+            <h2>Live Chat</h2>
+            <p>Eine Live Demo von unseren Chatbots</p>
+        </div>
+
+        <div id="chat-container" class="chat-container"></div>
+    </div>
 
     <div class="container">
         <h2>Kontaktiere uns</h2>
@@ -55,15 +63,29 @@
 
     <script>
         document.addEventListener("tidioChat-ready", function () {
-            // Standard-Widget verstecken
+            // Widget unten rechts ausblenden
+            window.tidioChatApi.hide();
 
-            // Widget in Container einbetten
-            const container = document.getElementById("chat-container");
-            container.appendChild(document.querySelector("#tidio-chat iframe"));
+            // Etwas warten, bis das iframe existiert
+            function moveChat() {
+                const tidioIframe = document.querySelector("#tidio-chat iframe");
+                if (tidioIframe) {
+                    const container = document.getElementById("chat-container");
+                    container.appendChild(tidioIframe);
+
+                    // Größe anpassen
+                    tidioIframe.style.width = "100%";
+                    tidioIframe.style.height = "100%";
+                } else {
+                    // Wenn noch nicht da → erneut versuchen
+                    setTimeout(moveChat, 200);
+                }
+            }
+
+            moveChat();
         });
     </script>
 
 </body>
-
 
 </html>
